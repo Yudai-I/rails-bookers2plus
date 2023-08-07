@@ -1,0 +1,87 @@
+<%= flash[:notice] %>
+
+<div class="container">  <!-- この行を追加 -->
+  <div class="row">      <!-- この行を追加 -->
+  <div class="col-md-3" style="background-color: white;">
+    
+    
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>User info</h1>
+
+<table class="table table-Hoverable">
+<% if current_user.profile_image.attached? %>
+<p class="mb-0"><%= image_tag @book.user.get_profile_image(100, 100) %></p>
+<% else %>
+    <%= image_tag 'sample-author1.jpg', size: "200x200" %>
+<% end %>
+
+ <tr>
+   <td>name</td>
+   <td><%= @book.user.name %></td>
+ </tr>
+
+ <tr>
+   <td>introduction</td>
+   <td><%= @book.user.introduction %></td>
+ </tr>
+</table>
+
+
+   <% if @book.user.id==current_user.id %>
+   <%= link_to edit_user_path(current_user.id), class: "btn btn-light btn-outline-secondary btn-block w-75", method: :get do %>
+   <i class="fa-solid fa-user-cog"></i>
+   <% end %>
+<% else %>
+<%= link_to edit_user_path(@book.user.id), class: "btn btn-light btn-outline-secondary btn-block w-75", method: :get do %>
+   <i class="fa-solid fa-user-cog"></i>
+<% end %>
+<% end %>
+ 
+
+
+<%= form_with model: Book.new do |f| %>
+<h2>New book</h2>
+  <p><label for="inputTitle">Title</label></p>
+  <%= f.text_field :title %>
+  <p><label for="inputOpinion">Opinion</label></p>
+  <p><%= f.text_area :body %></p>
+  <%= f.submit "Create Book",class:"btn-success" %>
+  <% end %>
+
+
+
+ </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table table-Hoverable">
+
+  <tr>
+  <td class="profile_image">
+    <%= link_to user_path(@book.user.id) do%>
+    <%= image_tag @book.user.get_profile_image(100,100) %>
+    <% end %>
+  <p><%= link_to "#{@book.user.name}", user_path(@book.user.id) %> </p>
+  </td>
+  
+  <td class="name"><%= link_to "#{@book.title}" %> </td>
+  <td class="name"><%= @book.body %></td>
+  <% if @book.user.id == current_user.id %>
+  <td class="link"><span><%= link_to "Edit", edit_book_path(@book),class:"btn btn-success" %></span></td>
+   <td class="link"><span><%= link_to "Destroy", book_path(@book), method: :delete,class:"btn btn-danger" %></span></td>
+   <% else %>
+   <td></td>
+   <td></td>
+   <% end %>
+  </tr>
+  </table>
+</div>
+</div>  <!-- この行を追加 -->
+</div>    <!-- この

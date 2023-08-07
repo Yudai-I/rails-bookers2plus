@@ -1,0 +1,74 @@
+
+  <div class="container">  <!-- この行を追加 -->
+  <div class="row">      <!-- この行を追加 -->
+  <div class="col-md-3" style="background-color: white;">
+    
+      <% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>User info</h1>
+
+<table class="table table-Hoverable">
+<% if current_user.profile_image.attached? %>
+<p class="mb-0"><%= image_tag current_user.get_profile_image(100, 100) %></p>
+<% else %>
+    <%= image_tag 'sample-author1.jpg', size: "200x200" %>
+<% end %>
+
+ <tr>
+   <td>name</td>
+   <td><%= current_user.name %></td>
+ </tr>
+
+ <tr>
+   <td>introduction</td>
+   <td><%= current_user.introduction %></td>
+ </tr>
+</table>
+
+
+   <%= link_to edit_user_path(current_user.id), class: "btn btn-light btn-outline-secondary btn-block w-75", method: :get do %>
+   <i class="fa-solid fa-user-cog"></i>
+   <% end %>
+
+
+<%= form_with model: Book.new do |f| %>
+<h2>New book</h2>
+  <p><label for="inputTitle">Title</label></p>
+  <%= f.text_field :title %>
+  <p><label for="inputOpinion">Opinion</label></p>
+  <p><%= f.text_area :body %></p>
+  <%= f.submit "Create Book",class:"btn-success" %>
+  <% end %>
+  
+      
+      
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+      <table class="table table-Hoverable">
+    <th>image</th>
+    <th>name</th>
+    <th></th>
+<% @users.each do |user| %>
+
+  <tr>
+  <td class="profile_image"><%= image_tag user.get_profile_image(100,100), accept:"image/*" %></td>
+ 
+  <td class="name"><%= user.name %></td>
+  
+  <td class="link">
+   <%= link_to "Show", user_path(user.id) %>
+   </td>
+  </tr>
+<% end %>
+  </table>
+</div>
+</div>
+</div>

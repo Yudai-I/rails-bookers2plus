@@ -1,0 +1,23 @@
+<% if @user.errors.any? %>
+  <%= @user.errors.count %> error prohted this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container-lg d-flex justify-content-center">
+
+<%= form_with model: @user do |f| %>
+<h2 class="row">User info</h2>
+   <div class="row"><label for="inputName">Name</label></div>
+  <div class="row"><%= f.text_field :name %></div>
+  <div class="row"><label for="inputImage">Image</label></div>
+  <div class="row"><%= f.file_field :profile_image,  accept: "image/*" %></div>
+  <div class="row"><label for="inputIntroduction">Introduction</label></div>
+  <div class="row"><%= f.text_area :introduction %></div>
+  
+  <div class="row"><%= f.submit "Update User",class:"btn-secondary" %></div>
+<% end %>
+</div>

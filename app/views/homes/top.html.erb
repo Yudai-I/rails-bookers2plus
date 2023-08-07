@@ -1,0 +1,25 @@
+<%= flash[:notice] %>
+<div class="container">
+ <div class="d-flex flex-column">
+ <div class="row">
+<h1 class="offset-3 col-lg-5">welcome to <p class="fa-solid fa-book"></p>Bookers !!</h1>
+</div>
+<div class="row">
+<span class="offset-3 col-lg-4">In&nbsp;<p class="fa-solid fa-book"></p>Bookers,</span>
+</div>
+<div class="row">
+<p class="col-lg-6 mx-auto">you can share and exchange your opinions, inpressions, and emotions<br>about various books!</p>
+</div>
+<div class="row">
+<div class="col-lg-5 mx-auto mb-3">
+        <%= link_to "Log in", new_user_session_path, class: "btn-sm btn-info btn-block d-flex align-items-center justify-content-center text-decoration-none" %>
+      </div>
+       </div>
+      <div class="row">
+       <div class="col-lg-5 mx-auto">
+        <%= link_to "Sign up", new_user_registration_path, class: "btn-sm btn-success btn-block d-flex align-items-center justify-content-center text-decoration-none" %>
+      </div>
+      </div>
+</div>
+</div>
+
