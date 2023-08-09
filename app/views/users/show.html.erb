@@ -30,15 +30,16 @@
    <td>introduction</td>
    <td><%= @user.introduction %></td>
  </tr>
+ 
 </table>
 
 <% if @user.id==current_user.id %>
    <%= link_to edit_user_path(current_user.id), class: "btn btn-light btn-outline-secondary btn-block w-75", method: :get do %>
-   <i class="fa-solid fa-user-cog"></i>
+   <i class="fas fa-user-cog"></i>
    <% end %>
 <% else %>
 <%= link_to edit_user_path(@user.id), class: "btn btn-light btn-outline-secondary btn-block w-75", method: :get do %>
-   <i class="fa-solid fa-user-cog"></i>
+   <i class="fas fa-user-cog"></i>
 <% end %>
 <% end %>
 
@@ -72,6 +73,24 @@
   <td class="title"><%= link_to "#{book.title}", book_path(book.id) %></td>
   
   <td class="body"><%= book.body %></td>
+  
+  <td><% if book.favorited_by?(current_user) %>
+    <p>
+      <%= link_to book_favorites_path(book.id), method: :delete do %>
+        <i class="fas fa-heart"></i><%= book.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to book_favorites_path(book.id), method: :post do %>
+        <i class="fas fa-heart"></i><%= book.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+  </td>
+  
+  <td><p><%= "コメント数: #{book.book_comments.count}" %></p></td>
+  
 
   </span>
   </tr>
